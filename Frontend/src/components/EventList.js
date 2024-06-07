@@ -8,7 +8,7 @@ const EventList = () => {
     const fetchEvents = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('https://<your-backend-url>/api/events', {
+        const res = await axios.get('/api/events', {
           headers: { 'Authorization': token }
         });
         setEvents(res.data);

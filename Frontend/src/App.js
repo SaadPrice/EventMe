@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Events from './pages/Events.';
+import Events from './pages/Event';
+import LandingPage from './pages/LandingPage';
 import './App.scss';
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
     <Router>
       <div className="app">
         <Switch>
+          <Route path="/" exact component={LandingPage} />
           <Route path="/events" component={Events} />
         </Switch>
       </div>
@@ -16,4 +18,5 @@ const App = () => {
 };
 
 export default App;
+
 

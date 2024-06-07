@@ -10,7 +10,7 @@ const EventForm = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('https://<your-backend-url>/api/events', {
+      const res = await axios.post('/api/events', {
         title,
         date,
         description
@@ -34,3 +34,4 @@ const EventForm = () => {
 };
 
 export default EventForm;
+
