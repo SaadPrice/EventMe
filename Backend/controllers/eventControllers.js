@@ -1,20 +1,17 @@
-const Event = require('../models/Event');
+const jwt = require('jsonwebtoken');
+const { User } = require('../models');
 
-exports.createEvent = async (req, res) => {
+const authMiddleware = async (req, res, next) => {
+  const token = req.header('Authorization');
+  if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
+
   try {
-    const { title, description, date, location } = req.body;
-    const event = await Event.create({ title, description, date, location });
-    res.status(201).json({ event });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findByPk(decoded.userId);
+    next();
+  } catch (err) {
+    res.status(401).json({ message: 'Token is not valid' });
   }
 };
 
-exports.getEvents = async (req, res) => {
-  try {
-    const events = await Event.findAll();
-    res.status(200).json({ events });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
+module.exports = authMiddleware;
