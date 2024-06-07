@@ -1,7 +1,6 @@
 const { Event } = require('../models');
 const axios = require('axios');
 
-// Create a new event
 const createEvent = async (req, res) => {
   const { title, date, description } = req.body;
   try {
@@ -9,7 +8,7 @@ const createEvent = async (req, res) => {
       title,
       date,
       description,
-      UserId: req.user.id // Assuming there is a foreign key to the user
+      UserId: req.user.id
     });
     res.status(201).json(event);
   } catch (error) {
@@ -17,7 +16,6 @@ const createEvent = async (req, res) => {
   }
 };
 
-// Get all events for the logged-in user
 const getEvents = async (req, res) => {
   try {
     const events = await Event.findAll({ where: { UserId: req.user.id } });
@@ -27,7 +25,6 @@ const getEvents = async (req, res) => {
   }
 };
 
-// Fetch events from Eventbrite
 const fetchEventbriteEvents = async (req, res) => {
   try {
     const response = await axios.get('https://www.eventbriteapi.com/v3/events/search/', {

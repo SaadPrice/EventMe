@@ -4,20 +4,16 @@ const sequelize = require('../config/database');
 const Event = sequelize.define('Event', {
   title: {
     type: DataTypes.STRING,
-    allowNull: false
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   date: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: false,
   },
-  location: {
+  description: {
     type: DataTypes.STRING,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
 module.exports = Event;
