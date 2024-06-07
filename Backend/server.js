@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const http = require('http');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const userRoutes = require('./routes/userRoutes');
+const WebSocket = require('ws');
 const cron = require('node-cron');
-const { fetchEventbriteEvents } = require('./controllers/eventController');
 
 dotenv.config();
 const app = express();
@@ -15,10 +17,34 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
+app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-// Schedule a cron job to run at midnight every day
+// Create an HTTP server
+const server = http.createServer(app);
+
+// Initialize WebSocket server
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', (ws) => {
+  console.log('New client connected');
+  
+  ws.on('message', (message) => {
+    console.log('received: %s', message);
+    ws.send(`Hello, you sent -> ${message}`);
+  });
+
+  ws.send('Hi there, I am a WebSocket server');
+
+  ws.on('close', () => {
+    console.log('Client disconnected');
+  });
+});
+
+// Task scheduler to update Eventbrite data
+const { fetchEventbriteEvents } = require('./controllers/eventController');
+
 cron.schedule('0 0 * * *', async () => {
   try {
     await fetchEventbriteEvents();
@@ -28,7 +54,7 @@ cron.schedule('0 0 * * *', async () => {
   }
 });
 
-app.listen(PORT, async () => {
+server.listen(PORT, async () => {
   try {
     await sequelize.authenticate();
     console.log('Database connected');
