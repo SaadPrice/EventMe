@@ -6,6 +6,7 @@ const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const userRoutes = require('./routes/userRoutes');
+const ticketRoutes = require('./routes/ticketRoutes');
 const WebSocket = require('ws');
 const cron = require('node-cron');
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/tickets', ticketRoutes);
 
 const PORT = process.env.PORT || 5000;
 
