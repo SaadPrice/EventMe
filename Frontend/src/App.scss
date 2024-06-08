@@ -1,0 +1,16 @@
+// Define the SCSS variable
+$carolina-blue: #56A0D3;
+
+.app {
+  background-color: $carolina-blue;
+  color: #000;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input, textarea {
+    margin: 10px 0;
+  }
+}

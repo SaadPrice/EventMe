@@ -1,0 +1,11 @@
+.app {
+  background-color: #56A0D3;
+  color: #000;
+}
+.app form {
+  display: flex;
+  flex-direction: column;
+}
+.app input, .app textarea {
+  margin: 10px 0;
+}/*# sourceMappingURL=App.css.map */

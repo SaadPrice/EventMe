@@ -1,19 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './LandingPage.scss';
-// If the image is in the src folder, you can import it like this:
-// import eventImage from '../path/to/your/image.jpg';
+import './LandingPage.scss'; // Ensure this path is correct
 
-const LandingPage = () => {
+function LandingPage() {
   return (
     <div className="landing-page">
+      <img src="/images/eventme-logo.jpg" alt="EventMe Logo" className="landing-logo" />
       <h1>Welcome to EventMe</h1>
-      {/* If the image is in the public folder, you can reference it like this: */}
-      <img src="/path/to/your/image.jpg" alt="Event" className="landing-page-image" />
-      <Link to="/events">View Events</Link>
     </div>
   );
-};
+}
 
 export default LandingPage;
+
 

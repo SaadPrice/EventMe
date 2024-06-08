@@ -1,25 +1,27 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Events from './pages/Event';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Events from './pages/Events'; // Ensure the case matches the actual file name
 import LandingPage from './pages/LandingPage';
 import MyTickets from './pages/MyTickets';
 import MySavedEvents from './pages/MySavedEvents';
-import './App.scss';
+import './App.scss'; // Ensure this path matches the location of App.scss
 
 const App = () => {
   return (
     <Router>
-      <div className="app">
-        <Switch>
-          <Route path="/" exact component={LandingPage} />
-          <Route path="/events" component={Events} />
-          <Route path="/my-tickets" component={MyTickets} />
-          <Route path="/my-saved-events" component={MySavedEvents} />
-        </Switch>
-      </div>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/my-tickets" element={<MyTickets />} />
+        <Route path="/my-saved-events" element={<MySavedEvents />} />
+      </Routes>
     </Router>
   );
 };
 
 export default App;
+
+
+
+
 
