@@ -25,4 +25,21 @@ const getUserSavedEvents = async (req, res) => {
   }
 };
 
-module.exports = { saveEvent, getUserSavedEvents };
+const deleteSavedEvent = async (req, res) => {
+  const { savedEventId } = req.params;
+  try {
+    const savedEvent = await SavedEvent.findByPk(savedEventId);
+    if (!savedEvent) return res.status(404).json({ message: 'Saved event not found' });
+
+    if (savedEvent.UserId !== req.user.id) return res.status(403).json({ message: 'Unauthorized' });
+
+    await savedEvent.destroy();
+    res.json({ message: 'Saved event deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { saveEvent, getUserSavedEvents, deleteSavedEvent };
+
+

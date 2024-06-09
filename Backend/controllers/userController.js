@@ -1,3 +1,4 @@
+// controllers/userController.js
 const { User } = require('../models');
 
 const deleteUser = async (req, res) => {
@@ -13,3 +14,4 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = { deleteUser };
+
