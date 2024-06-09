@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Ticket = sequelize.define('Ticket', {
+const Ticket = sequelize.define('ticket', {
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -9,3 +9,4 @@ const Ticket = sequelize.define('Ticket', {
 });
 
 module.exports = Ticket;
+

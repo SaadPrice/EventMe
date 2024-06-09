@@ -1,6 +1,6 @@
+require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const http = require('http');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
@@ -11,7 +11,6 @@ const savedEventRoutes = require('./routes/savedEventRoutes');
 const WebSocket = require('ws');
 const cron = require('node-cron');
 
-dotenv.config();
 const app = express();
 
 app.use(cors());

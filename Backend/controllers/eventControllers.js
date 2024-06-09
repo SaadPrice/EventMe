@@ -2,12 +2,12 @@ const { Event } = require('../models');
 const axios = require('axios');
 
 const createEvent = async (req, res) => {
-  const { title, date, description } = req.body;
+  const { title, date, location } = req.body;
   try {
     const event = await Event.create({
       title,
       date,
-      description,
+      location,
       UserId: req.user.id,
     });
     res.status(201).json(event);
@@ -36,24 +36,15 @@ const fetchEventbriteEvents = async (req, res) => {
     });
     const events = response.data.events;
 
-    if (req) {
-      res.json(events);
-    } else {
-      return events;
-    }
+    res.json(events);
   } catch (error) {
-    if (req) {
-      res.status(500).json({ error: error.message });
-    } else {
-      console.error('Error fetching Eventbrite events:', error);
-      throw error;
-    }
+    res.status(500).json({ error: error.message });
   }
 };
 
 const updateEvent = async (req, res) => {
   const { eventId } = req.params;
-  const { title, date, description } = req.body;
+  const { title, date, location } = req.body;
   try {
     const event = await Event.findByPk(eventId);
     if (!event) return res.status(404).json({ message: 'Event not found' });
@@ -62,7 +53,7 @@ const updateEvent = async (req, res) => {
 
     event.title = title;
     event.date = date;
-    event.description = description;
+    event.location = location;
     await event.save();
 
     res.json(event);
@@ -86,6 +77,37 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-module.exports = { createEvent, getEvents, fetchEventbriteEvents, updateEvent, deleteEvent };
+const insertEvents = async (req, res) => {
+  try {
+    const events = [
+      {
+        title: 'Godfrey',
+        date: new Date('2024-06-09T18:00:00'),
+        location: 'The Comedy Zone, Charlotte, NC',
+      },
+      {
+        title: 'Bossman Dlow',
+        date: new Date('2024-06-14T19:00:00'),
+        location: 'The Fillmore, Charlotte, NC',
+      },
+      {
+        title: 'Partynextdoor',
+        date: new Date('2024-07-25T19:00:00'),
+        location: 'The Fillmore, Charlotte, NC',
+      },
+    ];
+
+    for (const event of events) {
+      await Event.create(event);
+    }
+
+    res.status(201).json({ message: 'Events inserted successfully!' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createEvent, getEvents, fetchEventbriteEvents, updateEvent, deleteEvent, insertEvents };
+
 
 

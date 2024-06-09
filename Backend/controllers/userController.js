@@ -1,5 +1,5 @@
-// controllers/userController.js
 const { User } = require('../models');
+const bcrypt = require('bcryptjs');
 
 const deleteUser = async (req, res) => {
   try {
@@ -13,5 +13,36 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { deleteUser };
+const insertUsers = async (req, res) => {
+  try {
+    const users = [
+      {
+        username: 'Red Peppercorn',
+        email: 'red@gmail.com',
+        password: await bcrypt.hash('Peppercorn3', 10),
+      },
+      {
+        username: 'Chalky White',
+        email: 'boardwalk@gmail.com',
+        password: await bcrypt.hash('Boardwalkempire2', 10),
+      },
+      {
+        username: 'Blu Notes',
+        email: 'jazz@gmail.com',
+        password: await bcrypt.hash('Saxophone1', 10),
+      },
+    ];
+
+    for (const user of users) {
+      await User.create(user);
+    }
+
+    res.status(201).json({ message: 'Users inserted successfully!' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { deleteUser, insertUsers };
+
 

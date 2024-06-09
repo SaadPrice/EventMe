@@ -1,25 +1,26 @@
 const sequelize = require('../config/database');
-const User = require('./user');
-const Event = require('./event');
-const Ticket = require('./ticket');
-const SavedEvent = require('./savedEvent');
+const User = require('./user');  // Matches user.js
+const Event = require('./events');  // Matches events.js
+const Ticket = require('./tickets');  // Matches tickets.js
+const SavedEvent = require('./savedEvents');  // Matches savedEvents.js
 
-User.hasMany(Event);
-Event.belongsTo(User);
+// Define associations
+User.hasMany(Event, { foreignKey: 'UserId' });
+Event.belongsTo(User, { foreignKey: 'UserId' });
 
-User.hasMany(Ticket);
-Ticket.belongsTo(User);
+User.hasMany(Ticket, { foreignKey: 'UserId' });
+Ticket.belongsTo(User, { foreignKey: 'UserId' });
 
-Event.hasMany(Ticket);
-Ticket.belongsTo(Event);
+Event.hasMany(Ticket, { foreignKey: 'EventId' });
+Ticket.belongsTo(Event, { foreignKey: 'EventId' });
 
 User.belongsToMany(Event, { through: SavedEvent, as: 'SavedEvents' });
-Event.belongsToMany(User, { through: SavedEvent });
+Event.belongsToMany(User, { through: SavedEvent, as: 'UsersSaved' });
 
-sequelize.sync({ force: true }).then(() => {
-  console.log('Database & tables created!');
-});
-
-module.exports = { User, Event, Ticket, SavedEvent };
-
-
+module.exports = {
+  User,
+  Event,
+  Ticket,
+  SavedEvent,
+  sequelize
+};

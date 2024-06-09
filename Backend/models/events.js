@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Event = sequelize.define('Event', {
+const Event = sequelize.define('events', {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -10,10 +10,13 @@ const Event = sequelize.define('Event', {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  description: {
+  location: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
 module.exports = Event;
+
+
+
