@@ -1,16 +1,45 @@
-// Define the SCSS variable
-$carolina-blue: #56A0D3;
-
-.app {
-  background-color: $carolina-blue;
-  color: #000;
-
-  form {
-    display: flex;
-    flex-direction: column;
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-
-  input, textarea {
-    margin: 10px 0;
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(270deg, #191970, #0000CD, #00bfff);
+  background-size: 600% 600%;
+  animation: gradientAnimation 10s ease infinite;
+  font-family: Arial, sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: white;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.logo-container {
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Optional: if you want to add a background to the logo */
+  border-radius: 10px;
+}
+
+.logo-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
