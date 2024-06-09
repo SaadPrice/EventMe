@@ -1,18 +1,17 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Events from './pages/Events'; // Ensure the case matches the actual file name
+import Events from './pages/Events';
 import LandingPage from './pages/LandingPage';
 import MyTickets from './pages/MyTickets';
 import MySavedEvents from './pages/MySavedEvents';
-import Navbar from './components/Navbar'; // Import the Navbar component
-import './App.scss'; // Ensure this path matches the location of App.scss
+import Navbar from './components/Navbar';
+import './App.scss';
 
 const App = () => {
   return (
     <Router>
       <div id="root">
-        <Navbar />  {/* Add the Navbar component here */}
+        <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/events" element={<Events />} />
@@ -25,6 +24,7 @@ const App = () => {
 };
 
 export default App;
+
 
 
 

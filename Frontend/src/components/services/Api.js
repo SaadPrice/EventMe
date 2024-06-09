@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000/api'; // Change this to your backend URL
+const API_BASE_URL = 'http://localhost:5000/api'; // Adjust according to your setup
 
 axios.defaults.baseURL = API_BASE_URL;
 
@@ -25,8 +25,7 @@ const api = {
   updateEvent: (token, eventId, updatedData) => axios.put(`/events/${eventId}`, updatedData, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
+      'Authorization': `Bearer ${token}` }
   }),
   deleteEvent: (token, eventId) => axios.delete(`/events/${eventId}`, {
     headers: { 'Authorization': `Bearer ${token}` }
@@ -39,16 +38,15 @@ const api = {
   }),
 
   // Saved Events
-  saveEvent: (token, eventId) => axios.post('/events/save', { eventId }, {
+  saveEvent: (token, eventId) => axios.post('/saved-events/save', { eventId }, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
+      'Authorization': `Bearer ${token}` }
   }),
-  getUserSavedEvents: (token) => axios.get('/events/my-saved-events', {
+  getUserSavedEvents: (token) => axios.get('/saved-events/my-saved-events', {
     headers: { 'Authorization': `Bearer ${token}` }
   }),
-  deleteSavedEvent: (token, savedEventId) => axios.delete(`/events/delete-saved/${savedEventId}`, {
+  deleteSavedEvent: (token, savedEventId) => axios.delete(`/saved-events/delete-saved/${savedEventId}`, {
     headers: { 'Authorization': `Bearer ${token}` }
   }),
 
@@ -56,8 +54,7 @@ const api = {
   buyTicket: (token, eventId, quantity) => axios.post('/tickets/buy', { eventId, quantity }, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
+      'Authorization': `Bearer ${token}` }
   }),
   getUserTickets: (token) => axios.get('/tickets/my-tickets', {
     headers: { 'Authorization': `Bearer ${token}` }
@@ -68,3 +65,4 @@ const api = {
 };
 
 export default api;
+
