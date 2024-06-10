@@ -1,4 +1,4 @@
-require('dotenv').config(); // Load environment variables from .env file
+const dotenv = require('dotenv');
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
@@ -11,6 +11,7 @@ const savedEventRoutes = require('./routes/savedEventRoutes');
 const WebSocket = require('ws');
 const cron = require('node-cron');
 
+dotenv.config();
 const app = express();
 
 app.use(cors());
@@ -66,5 +67,6 @@ server.listen(PORT, async () => {
   }
   console.log(`Server running on port ${PORT}`);
 });
+
 
 

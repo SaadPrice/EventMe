@@ -46,3 +46,5 @@ const insertUsers = async (req, res) => {
 module.exports = { deleteUser, insertUsers };
 
 
+
+
