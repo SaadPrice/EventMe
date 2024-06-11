@@ -1,4 +1,4 @@
-const { User, Event, Ticket, SavedEvent, sequelize } = require('./backend/models');
+const { User, Event, Ticket, SavedEvent, sequelize } = require('./models');
 const bcrypt = require('bcryptjs');
 
 const users = [
@@ -131,3 +131,4 @@ const seedDatabase = async () => {
 };
 
 seedDatabase();
+

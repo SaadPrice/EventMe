@@ -1,8 +1,8 @@
 const sequelize = require('../config/database');
-const User = require('./user');  // Matches user.js
-const Event = require('./events');  // Matches events.js
-const Ticket = require('./tickets');  // Matches tickets.js
-const SavedEvent = require('./savedEvents');  // Matches savedEvents.js
+const User = require('./user');
+const Event = require('./events');
+const Ticket = require('./tickets');
+const SavedEvent = require('./savedEvents');
 
 // Define associations
 User.hasMany(Event, { foreignKey: 'UserId' });
@@ -24,3 +24,4 @@ module.exports = {
   SavedEvent,
   sequelize
 };
+
