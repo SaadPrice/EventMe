@@ -12,7 +12,8 @@ const createEvent = async (req, res) => {
     });
     res.status(201).json(event);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create event' });
   }
 };
 
@@ -21,7 +22,8 @@ const getEvents = async (req, res) => {
     const events = await Event.findAll({ where: { UserId: req.user.id } });
     res.json(events);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch events' });
   }
 };
 
@@ -30,15 +32,16 @@ const fetchEventbriteEvents = async (req, res) => {
     const response = await axios.get('https://www.eventbriteapi.com/v3/events/search/', {
       headers: { 'Authorization': `Bearer ${process.env.EVENTBRITE_TOKEN}` },
       params: {
-        q: req?.query?.q || 'default_query',
-        'location.address': req?.query?.location || 'default_location',
+        q: req.query.q || 'default_query',
+        'location.address': req.query.location || 'default_location',
       },
     });
     const events = response.data.events;
 
     res.json(events);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch Eventbrite events' });
   }
 };
 
@@ -58,7 +61,8 @@ const updateEvent = async (req, res) => {
 
     res.json(event);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to update event' });
   }
 };
 
@@ -73,7 +77,8 @@ const deleteEvent = async (req, res) => {
     await event.destroy();
     res.json({ message: 'Event deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to delete event' });
   }
 };
 
@@ -97,19 +102,16 @@ const insertEvents = async (req, res) => {
       },
     ];
 
-    for (const event of events) {
-      await Event.create(event);
-    }
+    await Event.bulkCreate(events);
 
     res.status(201).json({ message: 'Events inserted successfully!' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to insert events' });
   }
 };
 
 module.exports = { createEvent, getEvents, fetchEventbriteEvents, updateEvent, deleteEvent, insertEvents };
-
-
 
 
 
