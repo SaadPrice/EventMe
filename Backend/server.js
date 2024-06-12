@@ -23,6 +23,12 @@ app.use('/api/users', userRoutes);
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/saved-events', savedEventRoutes);
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 const PORT = process.env.PORT || 5000;
 
 // Create an HTTP server
@@ -33,7 +39,7 @@ const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
   console.log('New client connected');
-  
+
   ws.on('message', (message) => {
     console.log('received: %s', message);
     ws.send(`Hello, you sent -> ${message}`);
@@ -67,6 +73,23 @@ server.listen(PORT, async () => {
   }
   console.log(`Server running on port ${PORT}`);
 });
+
+// Graceful shutdown
+const shutdown = () => {
+  server.close(() => {
+    console.log('HTTP server closed');
+    sequelize.close().then(() => {
+      console.log('Database connection closed');
+      process.exit(0);
+    });
+  });
+  wss.close(() => {
+    console.log('WebSocket server closed');
+  });
+};
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
 
 
 
