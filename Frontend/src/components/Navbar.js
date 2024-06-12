@@ -1,31 +1,28 @@
-// src/components/Navbar.js
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const CustomNavbar = () => {
   return (
-    <ul className="nav nav-tabs">
-      <li className="nav-item">
-        <a className="nav-link active" aria-current="page" href="#">Home</a>
-      </li>
-      <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Events</a>
-        <ul className="dropdown-menu">
-          <li><a className="dropdown-item" href="#">Concerts</a></li>
-          <li><a className="dropdown-item" href="#">Festivals</a></li>
-          <li><a className="dropdown-item" href="#">Tours</a></li>
-          <li><hr className="dropdown-divider" /></li>
-          <li><a className="dropdown-item" href="#">Separated link</a></li>
-        </ul>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" href="#">Profile</a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
+    <Navbar bg="dark" variant="dark" expand="lg">
+      <Container>
+        <Navbar.Brand as={Link} to="/">EventMe</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/events">Events</Nav.Link>
+            <Nav.Link as={Link} to="/my-tickets">My Tickets</Nav.Link>
+            <Nav.Link as={Link} to="/my-saved-events">My Saved Events</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default CustomNavbar;
+
