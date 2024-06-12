@@ -1,16 +1,13 @@
+// src/pages/LandingPage.js
 import React from 'react';
-import CustomNavbar from '../components/Navbar'; // Adjust the import path if necessary
 import './LandingPage.css'; // Import any specific styles for the LandingPage
 
 const LandingPage = () => {
   return (
-    <div>
-      <CustomNavbar />
-      <div className="landing-page">
-        <div className="logo-container">
-          <img src="/images/eventme-logo.jpg" alt="EventMe Logo" className="landing-logo" />
-          <h1>Welcome to EventMe</h1>
-        </div>
+    <div className="landing-page">
+      <div className="logo-container">
+        <img src="/images/eventme-logo.jpg" alt="EventMe Logo" className="landing-logo" />
+        <h1>Welcome to EventMe</h1>
       </div>
     </div>
   );
