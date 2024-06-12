@@ -2,6 +2,8 @@
 
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const User = require('./user');
+const Event = require('./Event');
 
 // Define the Sequelize model
 const Ticket = sequelize.define('ticket', {
@@ -13,26 +15,30 @@ const Ticket = sequelize.define('ticket', {
     type: DataTypes.DATE,
     allowNull: false,
   },
+  quantity: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
   userId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'Users', // Name of the related model
+      model: User,
       key: 'id'
     }
   },
   eventId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'Events', // Name of the related model
+      model: Event,
       key: 'id'
     }
-  },
-  quantity: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
   }
 });
 
-// Export the model
+// Define associations
+Ticket.belongsTo(User, { foreignKey: 'userId' });
+Ticket.belongsTo(Event, { foreignKey: 'eventId' });
+
 module.exports = Ticket;
+
 

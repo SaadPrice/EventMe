@@ -28,6 +28,7 @@ const events = [
     title: 'Godfrey',
     date: new Date('2024-06-09T18:00:00'),
     location: 'The Comedy Zone, Charlotte, NC',
+    type: 'concert',
     UserId: 1,
   },
   {
@@ -35,6 +36,7 @@ const events = [
     title: 'Bossman Dlow',
     date: new Date('2024-06-14T19:00:00'),
     location: 'The Fillmore, Charlotte, NC',
+    type: 'concert',
     UserId: 2,
   },
   {
@@ -42,6 +44,7 @@ const events = [
     title: 'Partynextdoor',
     date: new Date('2024-07-25T19:00:00'),
     location: 'The Fillmore, Charlotte, NC',
+    type: 'concert',
     UserId: 3,
   },
 ];
@@ -49,36 +52,36 @@ const events = [
 const tickets = [
   {
     id: 1,
-    userId: 1,
-    eventId: 1,
+    UserId: 1,
+    EventId: 1,
     status: 'purchased',
     purchaseDate: new Date('2024-06-01'),
   },
   {
     id: 2,
-    userId: 2,
-    eventId: 2,
+    UserId: 2,
+    EventId: 2,
     status: 'reserved',
     purchaseDate: new Date('2024-06-05'),
   },
   {
     id: 3,
-    userId: 3,
-    eventId: 3,
+    UserId: 3,
+    EventId: 3,
     status: 'purchased',
     purchaseDate: new Date('2024-06-10'),
   },
   {
     id: 4,
-    userId: 1,
-    eventId: 3,
+    UserId: 1,
+    EventId: 3,
     status: 'purchased',
     purchaseDate: new Date('2024-07-01'),
   },
   {
     id: 5,
-    userId: 2,
-    eventId: 1,
+    UserId: 2,
+    EventId: 1,
     status: 'reserved',
     purchaseDate: new Date('2024-07-05'),
   },
@@ -87,32 +90,32 @@ const tickets = [
 const savedEvents = [
   {
     id: 1,
-    userId: 1,
-    eventId: 2,
+    UserId: 1,
+    EventId: 2,
     savedDate: new Date('2024-06-02'),
   },
   {
     id: 2,
-    userId: 2,
-    eventId: 3,
+    UserId: 2,
+    EventId: 3,
     savedDate: new Date('2024-06-06'),
   },
   {
     id: 3,
-    userId: 3,
-    eventId: 1,
+    UserId: 3,
+    EventId: 1,
     savedDate: new Date('2024-06-12'),
   },
   {
     id: 4,
-    userId: 1,
-    eventId: 3,
+    UserId: 1,
+    EventId: 3,
     savedDate: new Date('2024-07-01'),
   },
   {
     id: 5,
-    userId: 2,
-    eventId: 1,
+    UserId: 2,
+    EventId: 1,
     savedDate: new Date('2024-07-05'),
   },
 ];
@@ -131,4 +134,5 @@ const seedDatabase = async () => {
 };
 
 seedDatabase();
+
 
