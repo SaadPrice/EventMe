@@ -25,10 +25,19 @@ EventMe was inspired by the need to be Charlotte's number one management app for
 - No known bugs.
 - Future improvements could include more robust error handling and additional features like event reminders.
 - More images.
+<<<<<<< HEAD
+=======
+- Login/Signup forms not complete.
+  
+>>>>>>> 3d3b5cd3abecf075a272654407f8c1f3b843c50e
 
 ## Credits
 - Question AI
 - ChatGpt
 - Anna Kubrow
 - Marquett Burton
+<<<<<<< HEAD
 - Youtube
+=======
+- Youtube
+>>>>>>> 3d3b5cd3abecf075a272654407f8c1f3b843c50e
