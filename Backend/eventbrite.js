@@ -1,4 +1,4 @@
-const Eventbrite = require('eventbrite');
+const Eventbrite = require('eventbrite').default;
 const express = require('express');
 const router = express.Router();
 
@@ -21,3 +21,6 @@ router.get('/events', async (req, res) => {
 });
 
 module.exports = router;
+
+
+

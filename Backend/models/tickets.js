@@ -3,7 +3,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const User = require('./user');
-const Event = require('./Event');
+const Event = require('./events');
 
 // Define the Sequelize model
 const Ticket = sequelize.define('ticket', {

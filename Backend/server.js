@@ -2,95 +2,59 @@ const dotenv = require('dotenv');
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
+const path = require('path');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const userRoutes = require('./routes/userRoutes');
 const ticketRoutes = require('./routes/ticketRoutes');
 const savedEventRoutes = require('./routes/savedEventRoutes');
-const WebSocket = require('ws');
+const startWebSocketServer = require('./websocket'); // Import WebSocket server setup function
 const cron = require('node-cron');
+const eventbriteRoutes = require('./eventbrite'); // Correct the import path
 
 dotenv.config();
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/saved-events', savedEventRoutes);
+app.use('/api/eventbrite', eventbriteRoutes); // Use Eventbrite routes
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+// Anything that doesn't match the above routes, send back index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/frontend/build/index.html'));
 });
 
-const PORT = process.env.PORT || 5000;
+// Database connection
+sequelize.sync()
+  .then(() => console.log('Database connected'))
+  .catch((err) => console.error('Database connection error:', err));
 
-// Create an HTTP server
+// Create HTTP server
 const server = http.createServer(app);
 
-// Initialize WebSocket server
-const wss = new WebSocket.Server({ server });
+// Start WebSocket server
+startWebSocketServer(server);
 
-wss.on('connection', (ws) => {
-  console.log('New client connected');
-
-  ws.on('message', (message) => {
-    console.log('received: %s', message);
-    ws.send(`Hello, you sent -> ${message}`);
-  });
-
-  ws.send('Hi there, I am a WebSocket server');
-
-  ws.on('close', () => {
-    console.log('Client disconnected');
-  });
+// Start the server
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Task scheduler to update Eventbrite data
-const { fetchEventbriteEvents } = require('./controllers/eventController');
-
-cron.schedule('0 0 * * *', async () => {
-  try {
-    await fetchEventbriteEvents();
-    console.log('Eventbrite data updated');
-  } catch (error) {
-    console.error('Error updating Eventbrite data:', error);
-  }
+// Example cron job setup (if needed)
+cron.schedule('0 0 * * *', () => {
+  console.log('Cron job running every day at midnight');
+  // Add your cron job logic here
 });
-
-server.listen(PORT, async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Database connected');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-  console.log(`Server running on port ${PORT}`);
-});
-
-// Graceful shutdown
-const shutdown = () => {
-  server.close(() => {
-    console.log('HTTP server closed');
-    sequelize.close().then(() => {
-      console.log('Database connection closed');
-      process.exit(0);
-    });
-  });
-  wss.close(() => {
-    console.log('WebSocket server closed');
-  });
-};
-
-process.on('SIGTERM', shutdown);
-process.on('SIGINT', shutdown);
-
-
-
-
