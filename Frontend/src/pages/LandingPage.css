@@ -27,17 +27,17 @@
 .logo-container {
   text-align: center;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8); /* Optional: if you want to add a background to the logo */
+  background: linear-gradient(270deg, #191970, #0000CD, #00bfff); /* Optional: if you want to add a background to the logo */
   border-radius: 10px;
 }
 
 .logo-container img {
   width: 300px; /* Adjusted to fit within the logo container */
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .landing-page h1 {
   font-size: 2.5rem;
-  color: #fff; /* White text color for better contrast */
+  color: #ffffff; /* White text color for better contrast */
 }

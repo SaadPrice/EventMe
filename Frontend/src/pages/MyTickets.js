@@ -1,3 +1,4 @@
+// src/pages/MyTickets.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -8,8 +9,8 @@ const MyTickets = () => {
     const fetchTickets = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('/api/tickets/my-tickets', {
-          headers: { 'Authorization': token }
+        const res = await axios.get('http://localhost:5000/api/tickets/my-tickets', {
+          headers: { 'Authorization': `Bearer ${token}` }
         });
         setTickets(res.data);
       } catch (err) {
@@ -33,3 +34,4 @@ const MyTickets = () => {
 };
 
 export default MyTickets;
+

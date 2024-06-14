@@ -1,6 +1,6 @@
 // src/pages/SignUp.js
 import React from 'react';
-import Register from '../components/MyRegiser';  // Import the Register component
+import Register from '../components/MyRegister';  // Import the Register component
 
 const SignUp = () => {
   return (

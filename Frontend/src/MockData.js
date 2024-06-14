@@ -23,3 +23,9 @@ export const concerts = [
     eventsAttended: ['Concert 1', 'Festival 1', 'Tour 1'],
   };
   
+  export const tickets = [
+    { id: 1, event: { title: 'Concert 1' }, quantity: 2 },
+    { id: 2, event: { title: 'Festival 1' }, quantity: 4 },
+    { id: 3, event: { title: 'Tour 1' }, quantity: 1 },
+  ];
+  

@@ -27,9 +27,10 @@ const SavedEventButton = ({ eventId }) => {
   };
 
   return (
-    <button onClick={handleSave}>Save Event</button>
+    <button className="save-button" onClick={handleSave}>Save Event</button>
   );
 };
 
 export default SavedEventButton;
+
 

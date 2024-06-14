@@ -36,6 +36,42 @@ body {
 }
 
 .logo-container img {
-  max-width: 100%;
+  width: 300px; /* Adjusted to fit within the logo container */
   height: auto;
+  margin-bottom: 20px;
+}
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  height: 100vh;
+  background: linear-gradient(270deg, #191970, #0000CD, #00bfff);
+  background-size: 600% 600%;
+  animation: gradientAnimation 10s ease infinite;
+  color: #191970;
+}
+
+.landing-page h1 {
+  font-size: 2.5rem;
+  color: #fff; /* White text color for better contrast */
+}
+
+.save-button {
+  background-color: white; /* Initial background color */
+  border: 2px solid black; /* Border color */
+  color: black; /* Text color */
+  border-radius: 50%; /* Make the button round */
+  padding: 10px 20px; /* Adjust padding to make the button circular */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.save-button:hover {
+  background-color: rgba(0, 187, 255, 0.537); /* Background color on hover */
+  color: white; /* Text color on hover */
 }/*# sourceMappingURL=App.css.map */

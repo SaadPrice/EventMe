@@ -1,7 +1,7 @@
 // src/components/Navbar.js
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CustomNavbar = () => {
   return (
@@ -12,15 +12,13 @@ const CustomNavbar = () => {
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <NavDropdown title="Events" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/events">All Events</NavDropdown.Item>
-            <NavDropdown.Item href="#concerts">Concerts</NavDropdown.Item>
-            <NavDropdown.Item href="#festivals">Festivals</NavDropdown.Item>
-            <NavDropdown.Item href="#tours">Tours</NavDropdown.Item>
+            <NavDropdown.Item href="/events/concerts">Concerts</NavDropdown.Item>
+            <NavDropdown.Item href="/events/festivals">Festivals</NavDropdown.Item>
+            <NavDropdown.Item href="/events/tours">Tours</NavDropdown.Item>
           </NavDropdown>
           <Nav.Link href="/profile">Profile</Nav.Link>
-          <Nav.Link href="#disabled" disabled>
-            Disabled
-          </Nav.Link>
+          <Nav.Link href="/my-tickets">My Tickets</Nav.Link>
+          <Nav.Link href="/login">Sign In/Login</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -1,6 +1,6 @@
 // src/pages/FestivalsPage.js
 import React from 'react';
-import { festivals } from '../mockData';
+import { festivals } from '../MockData';
 import SavedEventButton from '../components/SavedEventButton';
 
 const FestivalsPage = () => {
