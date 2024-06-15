@@ -1,11 +1,11 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Events from './pages/Events';
 import LandingPage from './pages/LandingPage';
 import MyTickets from './pages/MyTickets';
 import MySavedEvents from './pages/MySavedEvents';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import SignInSignUp from './pages/SignInSignUp'; // Correct import
 import UserProfile from './pages/UserProfile';
 import ConcertsPage from './pages/ConcertsPage';
 import FestivalsPage from './pages/FestivalsPage';
@@ -28,9 +28,8 @@ const App = () => {
             <Route path="/events/tours" element={<ToursPage />} />
             <Route path="/my-tickets" element={<MyTickets />} />
             <Route path="/my-saved-events" element={<MySavedEvents />} />
-            <Route path="/login" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/user-profile" element={<UserProfile />} />
+            <Route path="/login" element={<SignInSignUp />} />
+            <Route path="/profile" element={<UserProfile />} />
             <Route path="/websocket" element={<WebSocket />} />
             <Route path="/eventbrite" element={<Eventbrite />} />
           </Routes>
@@ -41,8 +40,6 @@ const App = () => {
 };
 
 export default App;
-
-
 
 
 

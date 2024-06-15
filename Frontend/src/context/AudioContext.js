@@ -10,10 +10,8 @@ const AudioProvider = ({ children }) => {
   useEffect(() => {
     const audioElement = audioRef.current;
     audioElement.loop = true;
-    audioElement.muted = true; // Start muted
     if (isPlaying) {
       audioElement.play();
-      audioElement.muted = false; // Unmute after play
     } else {
       audioElement.pause();
     }
@@ -26,10 +24,14 @@ const AudioProvider = ({ children }) => {
   return (
     <AudioContext.Provider value={{ isPlaying, togglePlayPause }}>
       {children}
+      <button onClick={togglePlayPause}>
+        {isPlaying ? 'Pause Music' : 'Play Music'}
+      </button>
     </AudioContext.Provider>
   );
 };
 
 export { AudioProvider, AudioContext };
+
 
 

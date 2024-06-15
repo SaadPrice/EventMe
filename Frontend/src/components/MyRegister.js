@@ -1,8 +1,6 @@
-// src/components/MyRegister.js
+// src/components/Register.js
 import React, { useState } from 'react';
-import Api from './Api'; // Updated path to Api.js
-
-console.log("MyRegister component loaded");
+import Api from './Api'; // Ensure this path is correct
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });

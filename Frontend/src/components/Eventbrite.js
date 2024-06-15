@@ -7,9 +7,8 @@ const Eventbrite = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await api.fetchEventbriteEvents(token, 'music', 'Charlotte, NC');
-        setEvents(response.data.events);
+        const response = await api.fetchEventbriteEvents(null, 'music', 'Charlotte, NC');
+        setEvents(response.data);
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -38,5 +37,6 @@ const Eventbrite = () => {
 };
 
 export default Eventbrite;
+
 
 
