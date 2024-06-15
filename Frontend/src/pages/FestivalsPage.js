@@ -1,11 +1,11 @@
-// src/pages/FestivalsPage.js
 import React from 'react';
+
 import { festivals } from '../MockData';
 import SavedEventButton from '../components/SavedEventButton';
 
 const FestivalsPage = () => {
   return (
-    <div>
+    <div className="festivals-page">
       <h1>Festivals</h1>
       <ul>
         {festivals.map(festival => (
@@ -20,3 +20,4 @@ const FestivalsPage = () => {
 };
 
 export default FestivalsPage;
+

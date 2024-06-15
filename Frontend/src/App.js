@@ -4,7 +4,7 @@ import Events from './pages/Events';
 import LandingPage from './pages/LandingPage';
 import MyTickets from './pages/MyTickets';
 import MySavedEvents from './pages/MySavedEvents';
-import Login from './pages/Login';
+import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import UserProfile from './pages/UserProfile';
 import ConcertsPage from './pages/ConcertsPage';
@@ -28,7 +28,7 @@ const App = () => {
             <Route path="/events/tours" element={<ToursPage />} />
             <Route path="/my-tickets" element={<MyTickets />} />
             <Route path="/my-saved-events" element={<MySavedEvents />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/user-profile" element={<UserProfile />} />
             <Route path="/websocket" element={<WebSocket />} />
@@ -41,6 +41,8 @@ const App = () => {
 };
 
 export default App;
+
+
 
 
 
