@@ -1,9 +1,13 @@
 const Eventbrite = require('eventbrite').default;
 const express = require('express');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 const router = express.Router();
 
-// Replace with your actual Eventbrite API token
-const eventbriteToken = 'FSTTP3JVO5GUZ2TOHQ';
+// Use the token from your .env file
+const eventbriteToken = process.env.EVENTBRITE_OAUTH_TOKEN;
 
 // Create an instance of the Eventbrite SDK
 const sdk = Eventbrite({ token: eventbriteToken });
@@ -13,14 +17,16 @@ router.get('/events', async (req, res) => {
   try {
     const events = await sdk.request('/events/search/', {
       'location.address': 'Charlotte, NC',
+      q: 'music'
     });
-    res.json(events);
+    res.json(events.events);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
 module.exports = router;
+
 
 
 
