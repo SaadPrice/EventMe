@@ -1,4 +1,3 @@
-// src/pages/MyTickets.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -14,7 +13,7 @@ const MyTickets = () => {
         });
         setTickets(res.data);
       } catch (err) {
-        console.error(err);
+        console.error('Error fetching tickets:', err);
       }
     };
 
@@ -23,15 +22,23 @@ const MyTickets = () => {
 
   return (
     <div>
-      {tickets.map((ticket) => (
-        <div key={ticket.id}>
-          <h2>{ticket.Event.title}</h2>
-          <p>Quantity: {ticket.quantity}</p>
-        </div>
-      ))}
+      <h1>My Tickets</h1>
+      {tickets.length > 0 ? (
+        <ul>
+          {tickets.map(ticket => (
+            <li key={ticket.id}>
+              <h2>{ticket.eventName}</h2>
+              <p>Quantity: {ticket.quantity}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No tickets found.</p>
+      )}
     </div>
   );
 };
 
 export default MyTickets;
+
 
