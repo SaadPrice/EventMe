@@ -1,9 +1,11 @@
-// src/components/Register.js
 import React, { useState } from 'react';
 import Api from './Api'; // Ensure this path is correct
+import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+const MyRegister = () => {
+  const [formData, setFormData] = useState({ username: '', email: '', password: '' });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,8 +17,10 @@ const Register = () => {
     try {
       const response = await Api.register(formData);
       console.log('User registered successfully:', response.data);
+      navigate('/login'); // Redirect to login page after successful registration
     } catch (error) {
       console.error('Error registering user:', error);
+      setError('Failed to register user');
     }
   };
 
@@ -30,6 +34,13 @@ const Register = () => {
         placeholder="Username"
       />
       <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+      <input
         type="password"
         name="password"
         value={formData.password}
@@ -37,9 +48,13 @@ const Register = () => {
         placeholder="Password"
       />
       <button type="submit">Register</button>
+      {error && <p>{error}</p>}
     </form>
   );
 };
 
-export default Register;
+export default MyRegister;
+ 
+
+
 

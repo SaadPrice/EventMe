@@ -1,20 +1,34 @@
-// src/pages/ConcertsPage.js
-import React from 'react';
-import { concerts } from '../MockData';
-import SavedEventButton from '../components/SavedEventButton';
+import React, { useEffect, useState } from 'react';
+import Api from '../components/Api'; // Ensure the correct path to Api
 
 const ConcertsPage = () => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await Api.getEvents(token);
+        const concerts = response.data.filter(event => event.type === 'Concert'); // Adjust according to your data structure
+        setEvents(concerts);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
     <div>
       <h1>Concerts</h1>
-      <ul>
-        {concerts.map(concert => (
-          <li key={concert.id}>
-            {concert.name} - {concert.date} - {concert.location}
-            <SavedEventButton eventId={concert.id} />
-          </li>
-        ))}
-      </ul>
+      {events.map((event) => (
+        <div key={event.id}>
+          <h2>{event.title}</h2>
+          <p>{new Date(event.date).toLocaleDateString()} {new Date(event.date).toLocaleTimeString()}</p>
+          <p>{event.location}</p>
+        </div>
+      ))}
     </div>
   );
 };

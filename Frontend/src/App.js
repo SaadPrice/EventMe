@@ -1,12 +1,11 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Events from './pages/Events';
+import Event from './components/Event'; // Updated path
 import LandingPage from './pages/LandingPage';
 import MyTickets from './pages/MyTickets';
 import MySavedEvents from './pages/MySavedEvents';
-import SignInSignUp from './pages/SignInSignUp'; // Correct import
-import UserProfile from './pages/UserProfile';
+import SignInSignUp from './components/SignInSignUp'; // Correct import
+import UserProfile from './components/UserProfile'; // Correct import
 import ConcertsPage from './pages/ConcertsPage';
 import FestivalsPage from './pages/FestivalsPage';
 import ToursPage from './pages/ToursPage';
@@ -22,7 +21,7 @@ const App = () => {
         <div id="root">
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/events" element={<Events />} />
+            <Route path="/events" element={<Event />} />
             <Route path="/events/concerts" element={<ConcertsPage />} />
             <Route path="/events/festivals" element={<FestivalsPage />} />
             <Route path="/events/tours" element={<ToursPage />} />
@@ -40,6 +39,7 @@ const App = () => {
 };
 
 export default App;
+
 
 
 

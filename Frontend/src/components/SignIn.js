@@ -1,9 +1,11 @@
-// src/components/SignIn.js
 import React, { useState } from 'react';
 import Api from './Api'; // Ensure the path to Api.js is correct
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,20 +18,21 @@ const SignIn = () => {
       const response = await Api.login(formData);
       console.log('User logged in successfully:', response.data);
       localStorage.setItem('token', response.data.token);
-      // Redirect user after successful login, if needed
+      navigate('/profile'); // Redirect to profile page after successful login
     } catch (error) {
       console.error('Error logging in user:', error);
+      setError('Failed to login');
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
-        name="username"
-        value={formData.username}
+        type="email"
+        name="email"
+        value={formData.email}
         onChange={handleChange}
-        placeholder="Username"
+        placeholder="Email"
       />
       <input
         type="password"
@@ -39,8 +42,10 @@ const SignIn = () => {
         placeholder="Password"
       />
       <button type="submit">Sign In</button>
+      {error && <p>{error}</p>}
     </form>
   );
 };
 
 export default SignIn;
+

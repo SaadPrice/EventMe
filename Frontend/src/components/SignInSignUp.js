@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SignIn from '../components/SignIn';
-import Register from '../components/MyRegister'; // Correct path to MyRegister component
+import SignIn from './SignIn';
+import MyRegister from './MyRegister'; // Ensure the correct path to MyRegister component
 
 const SignInSignUp = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -12,7 +12,7 @@ const SignInSignUp = () => {
   return (
     <div>
       <h1>{isSignUp ? 'Sign Up' : 'Sign In'}</h1>
-      {isSignUp ? <Register /> : <SignIn />}
+      {isSignUp ? <MyRegister /> : <SignIn />}
       <button onClick={toggleForm}>
         {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
       </button>
@@ -21,5 +21,7 @@ const SignInSignUp = () => {
 };
 
 export default SignInSignUp;
+
+
 
 
