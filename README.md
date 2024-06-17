@@ -37,8 +37,8 @@ go away.
 - More images.
 - Add video so that users can see the events from a previoius venue before making a decision to purchase a ticket.
 - Still working with eventbrite to fetch data
-- Login/Signup forms not complete.
-  
+- Sign up page works, but returns failed to register user.
+- Still have problems deploying.
 
 ## Credits
 - Question AI
