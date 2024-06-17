@@ -24,9 +24,10 @@ router.get('/', authMiddleware, getEvents);
 router.get('/eventbrite', authMiddleware, fetchEventbriteEvents);
 router.put('/:eventId', authMiddleware, updateEvent);
 router.delete('/:eventId', authMiddleware, deleteEvent);
-router.post('/bulk-insert', insertEvents); // New endpoint for bulk insertion
+router.post('/bulk-insert', insertEvents);
 
 module.exports = router;
+
 
 
 

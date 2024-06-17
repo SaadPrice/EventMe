@@ -1,19 +1,19 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const User = require('./user');
-const Event = require('./events');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const SavedEvents = sequelize.define('SavedEvents', {
+    savedDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  });
 
-const SavedEvent = sequelize.define('SavedEvent', {
-  savedDate: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-});
+  SavedEvents.associate = function(models) {
+    SavedEvents.belongsTo(models.User, { foreignKey: 'UserId' });
+    SavedEvents.belongsTo(models.Event, { foreignKey: 'EventId' });
+  };
 
-SavedEvent.belongsTo(User, { foreignKey: 'UserId' });
-SavedEvent.belongsTo(Event, { foreignKey: 'EventId' });
-
-module.exports = SavedEvent;
+  return SavedEvents;
+};
 
 
   

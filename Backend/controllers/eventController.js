@@ -1,5 +1,4 @@
 const { Event } = require('../models');
-const axios = require('axios');
 
 const createEvent = async (req, res) => {
   const { title, date, location } = req.body;
@@ -112,7 +111,6 @@ const insertEvents = async (req, res) => {
 };
 
 module.exports = { createEvent, getEvents, fetchEventbriteEvents, updateEvent, deleteEvent, insertEvents };
-
 
 
 

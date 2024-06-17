@@ -1,21 +1,26 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  });
 
-const User = sequelize.define('user', {
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+  User.associate = function(models) {
+    User.hasMany(models.Tickets, { foreignKey: 'userId' });
+    User.hasMany(models.SavedEvents, { foreignKey: 'UserId' });
+    User.hasMany(models.Event, { foreignKey: 'UserId' });
+  };
 
-module.exports = User;
+  return User;
+};

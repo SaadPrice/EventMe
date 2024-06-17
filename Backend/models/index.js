@@ -1,27 +1,38 @@
-const sequelize = require('../config/database');
-const User = require('./user');
-const Event = require('./events');
-const Ticket = require('./tickets');
-const SavedEvent = require('./savedEvents');
+'use strict';
 
-// Define associations
-User.hasMany(Event, { foreignKey: 'UserId' });
-Event.belongsTo(User, { foreignKey: 'UserId' });
+require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.js')[env];
+const db = {};
 
-User.hasMany(Ticket, { foreignKey: 'UserId' });
-Ticket.belongsTo(User, { foreignKey: 'UserId' });
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
-Event.hasMany(Ticket, { foreignKey: 'EventId' });
-Ticket.belongsTo(Event, { foreignKey: 'EventId' });
+fs
+  .readdirSync(__dirname)
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
+  });
 
-User.belongsToMany(Event, { through: SavedEvent, as: 'SavedEvents' });
-Event.belongsToMany(User, { through: SavedEvent, as: 'UsersSaved' });
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
 
-module.exports = {
-  User,
-  Event,
-  Ticket,
-  SavedEvent,
-  sequelize
-};
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
+module.exports = db;
