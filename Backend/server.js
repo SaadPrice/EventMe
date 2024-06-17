@@ -11,7 +11,7 @@ const ticketRoutes = require('./routes/ticketRoutes');
 const savedEventRoutes = require('./routes/savedEventRoutes');
 const startWebSocketServer = require('./websocket'); // Import WebSocket server setup function
 const cron = require('node-cron');
-const eventbriteRoutes = require('./eventbrite'); // Correct the import path
+const eventbriteRoutes = require('./routes/eventbriteRoutes'); // Correct the import path
 
 dotenv.config();
 const app = express();
@@ -29,11 +29,11 @@ app.use('/api/saved-events', savedEventRoutes);
 app.use('/api/eventbrite', eventbriteRoutes); // Use Eventbrite routes
 
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Anything that doesn't match the above routes, send back index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/frontend/build/index.html'));
+  res.sendFile(path.join(__dirname + '../frontend/build/index.html'));
 });
 
 // Database connection
