@@ -17,7 +17,8 @@ const MyRegister = () => {
     try {
       const response = await Api.register(formData);
       console.log('User registered successfully:', response.data);
-      navigate('/login'); // Redirect to login page after successful registration
+      localStorage.setItem('token', response.data.token);
+      navigate('/profile'); // Redirect to profile page after successful registration
     } catch (error) {
       console.error('Error registering user:', error);
       setError('Failed to register user');
@@ -54,6 +55,9 @@ const MyRegister = () => {
 };
 
 export default MyRegister;
+
+
+
  
 
 

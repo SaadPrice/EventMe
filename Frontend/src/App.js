@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Event from './components/Event'; // Updated path
+import Event from './components/Event'; // Ensure this path is correct
 import LandingPage from './pages/LandingPage';
 import MyTickets from './pages/MyTickets';
 import MySavedEvents from './pages/MySavedEvents';
-import SignInSignUp from './components/SignInSignUp'; // Correct import
-import UserProfile from './components/UserProfile'; // Correct import
+import SignInSignUp from './components/SignInSignUp'; // Ensure this path is correct
+import UserProfile from './components/UserProfile'; // Ensure this path is correct
 import ConcertsPage from './pages/ConcertsPage';
 import FestivalsPage from './pages/FestivalsPage';
 import ToursPage from './pages/ToursPage';
@@ -39,6 +39,7 @@ const App = () => {
 };
 
 export default App;
+
 
 
 

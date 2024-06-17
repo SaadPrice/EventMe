@@ -3,6 +3,7 @@ import Api from './Api';
 
 const UserProfile = () => {
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -12,17 +13,23 @@ const UserProfile = () => {
         try {
           const response = await Api.getUserProfile(token);
           setProfile(response.data);
+          setLoading(false);
         } catch (error) {
           console.error('Error fetching profile:', error);
           setError('Failed to fetch profile');
+          setLoading(false);
         }
+      } else {
+        setError('No token found');
+        setLoading(false);
       }
     };
 
     fetchProfile();
   }, []);
 
-  if (!profile) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div>
@@ -35,12 +42,15 @@ const UserProfile = () => {
           <li key={index}>{event.title}</li>
         ))}
       </ul>
-      {error && <p>{error}</p>}
     </div>
   );
 };
 
 export default UserProfile;
+
+
+
+
 
 
 

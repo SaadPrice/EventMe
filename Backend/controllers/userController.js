@@ -2,17 +2,20 @@ const { User, Event } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+// Register a new user
 const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ username, email, password: hashedPassword });
-    res.status(201).json({ message: 'User registered successfully!' });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.status(201).json({ token, message: 'User registered successfully!' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
+// Login an existing user
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -29,6 +32,7 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Delete a user
 const deleteUser = async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id);
@@ -41,6 +45,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// Insert multiple users (for bulk creation)
 const insertUsers = async (req, res) => {
   try {
     const users = [
@@ -71,6 +76,7 @@ const insertUsers = async (req, res) => {
   }
 };
 
+// Get user profile
 const getUserProfile = async (req, res) => {
   try {
     const user = await User.findByPk(req.user.id, {
@@ -86,3 +92,4 @@ const getUserProfile = async (req, res) => {
 };
 
 module.exports = { registerUser, loginUser, deleteUser, insertUsers, getUserProfile };
+
